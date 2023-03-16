@@ -1,0 +1,25 @@
+# Template file for 'ashuffle'
+pkgname=ashuffle
+version=3.13.6
+revision=1
+build_style=meson
+hostmakedepends="git cmake pkg-config"
+makedepends="libmpdclient-devel"
+short_desc="Automatic library-wide shuffle for mpd"
+maintainer="dvdrw <void@dvdrw.dev>"
+license="MIT"
+homepage="https://github.com/joshkunz/ashuffle"
+
+configure_args+=' --buildtype=release'
+
+do_fetch() {
+	git clone https://github.com/joshkunz/ashuffle.git ${wrksrc}
+	cd ${wrksrc}
+	git checkout v${version}
+	git submodule update --init --recursive
+	meson subprojects download || true
+}
+
+post_install() {
+	vlicense LICENSE
+}
