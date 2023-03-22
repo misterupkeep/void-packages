@@ -1,0 +1,27 @@
+# Template file for 'nqptp'
+pkgname=nqptp
+version=1.1.20230127
+revision=1
+build_style=gnu-configure
+# Attach git commitish into version string
+configure_args="CPPFLAGS=-DCONFIG_USE_GIT_VERSION_STRING"
+hostmakedepends="autoconf automake"
+short_desc="Partial IEEE 1588-2008 PTP implementation server"
+maintainer="dvdrw <void@dvdrw.dev>"
+license="GPL-2.0"
+homepage="https://github.com/mikebrady/nqptp"
+commit=5672c33983ab0125cd067be2d004598c49bf45c3
+distfiles="https://github.com/mikebrady/nqptp/archive/${commit}.zip"
+checksum=d54109fe1395a2e9552c5b83f25b6446429bcf2c5efb79dfc53dd1684a5c25e1
+
+pre_configure() {
+	autoreconf -fi
+}
+
+pre_build() {
+        echo "char git_version_string[] = \"1.1-dev-$(echo $commit | head -c 8)\";" > gitversion.h
+}
+
+post_install() {
+        vsv nqptp
+}
