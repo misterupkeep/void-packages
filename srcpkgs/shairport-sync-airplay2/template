@@ -1,0 +1,52 @@
+# Template file for 'shairport-sync-airplay2'
+pkgname=shairport-sync-airplay2
+version=4.1.1
+revision=1
+build_style=gnu-configure
+configure_args="$(vopt_if dns_sd CPPFLAGS=-I/usr/include/avahi-compat-libdns_sd/) --with-configfiles --program-suffix=-airplay2 --sysconfdir=/etc --with-metadata --with-airplay-2 --with-ssl=openssl --with-avahi $(vopt_with tinysvcmdns) $(vopt_with dns_sd) $(vopt_with mqtt mqtt-client) $(vopt_with dbus dbus-interface) $(vopt_with mpris mpris-interface) $(vopt_with soxr) $(vopt_with convolution) $(vopt_with alac apple-alac) $(vopt_with alsa) $(vopt_with sndio) $(vopt_with pa) $(vopt_with pw) $(vopt_with jack) $(vopt_with stdout) $(vopt_with pipe)"
+hostmakedepends="autoconf automake pkg-config xxd $(vopt_if dbus glib-devel) $(vopt_if mpris glib-devel)"
+makedepends="popt-devel libconfig-devel libconfig libplist-devel libsodium-devel libgcrypt-devel ffmpeg-devel openssl-devel avahi-libs-devel $(vopt_if dns_sd avahi-compat-libs-devel) $(vopt_if mqtt libmosquitto-devel) $(vopt_if dbus glib-devel) $(vopt_if mpris glib-devel) $(vopt_if soxr libsoxr-devel) $(vopt_if alac alac-devel) $(vopt_if convolution libsndfile-devel) $(vopt_if alsa alsa-lib-devel) $(vopt_if sndio sndio-devel) $(vopt_if pa pulseaudio-devel) $(vopt_if pw pipewire-devel)"
+depends="nqptp"
+alternatives="shairport-sync:/usr/bin/shairport-sync:/usr/bin/shairport-sync-airplay2"
+short_desc="AirPlay 2 audio player"
+maintainer="dvdrw <void@dvdrw.dev>"
+license="MIT, BSD, GPL-3.0, ISC"
+homepage="https://github.com/mikebrady/shairport-sync"
+changelog="https://github.com/mikebrady/shairport-sync/releases"
+distfiles="https://github.com/mikebrady/shairport-sync/archive/refs/tags/${version}.tar.gz"
+checksum=e55caad73dcd36341baf8947cf5e0923997370366d6caf3dd917b345089c4a20
+
+# Package build options
+build_options="mqtt dbus mpris alac soxr convolution alsa sndio pa pw jack stdout pipe tinysvcmdns dns_sd"
+
+# IPC options
+desc_option_mqtt="Include a client for MQTT"
+desc_option_dbus="Expose the native Shairport Sync D-Bus interface"
+desc_option_mpris="Expose an MPRIS D-Bus interface"
+
+# Audio processing options
+desc_option_soxr="Use libsoxr resampling for improved interpolation"
+desc_option_alac="Use Apple ALAC decoder to support ALAC-compressed streams"
+desc_option_convolution="Enables convolution filtering. Uses libsndfile"
+
+desc_option_tinysvcmdns="Enables tinysvcmdns mDNS advertising backend"
+desc_option_dns_sd="Enables dns_sd (legacy Apple Bonjour) mDNS advertising backend"
+
+# Audio backend options
+desc_option_alsa="Enables ALSA audio output support"
+desc_option_sndio="Enables sndio audio output support"
+desc_option_pa="Enables PulseAudio audio output support"
+desc_option_pw="Enables PipeWire audio output support"
+desc_option_jack="Enables JACK audio output support"
+desc_option_stdout="Enables stdout audio output support"
+desc_option_pipe="Enables Unix pipe audio output support"
+
+build_options_default="openssl avahi dbus mpris soxr alac convolution alsa pa stdout pipe"
+
+pre_configure() {
+	autoreconf -fi
+}
+
+post_install() {
+	vlicense LICENSES
+}
