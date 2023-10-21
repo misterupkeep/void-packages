@@ -1,7 +1,7 @@
 # Template file for 'darktable'
 pkgname=darktable
-version=4.2.1
-revision=1
+version=4.4.2
+revision=2
 # upstream only supports these archs:
 archs="x86_64* aarch64* ppc64le*"
 build_style=cmake
@@ -20,26 +20,10 @@ depends="adwaita-icon-theme"
 short_desc="Virtual lighttable and darkroom for photographers"
 maintainer="lemmi <lemmi@nerd2nerd.org>"
 license="GPL-3.0-or-later"
-homepage="http://www.darktable.org/"
+homepage="https://www.darktable.org/"
 changelog="https://github.com/darktable-org/darktable/releases"
 distfiles="https://github.com/darktable-org/darktable/releases/download/release-${version}/darktable-${version}.tar.xz"
-checksum=603a39c6074291a601f7feb16ebb453fd0c5b02a6f5d3c7ab6db612eadc97bac
+checksum=c11d28434fdf2e9ce572b9b1f9bc4e64dcebf6148e25080b4c32eb51916cfa98
 
-# 2022-01-05
-# avif doesn't load correctly, disable avif by default for now:
-# [imageio_load_module_format] failed to open `avif': (null)
 build_options="avif gmic sdl2"
-
-if [ ! "$CROSS_BUILD" ]; then
-	build_options_default+=" gmic sdl2"
-fi
-
-# Temporarily disable OpenMP for aarch64:
-#
-# see https://github.com/void-linux/void-packages/issues/21105
-
-case $XBPS_TARGET_MACHINE in
-	aarch64*)
-		configure_args+=" -DUSE_OPENMP=OFF"
-		;;
-esac
+build_options_default="avif gmic sdl2"

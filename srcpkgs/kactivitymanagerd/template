@@ -1,6 +1,6 @@
 # Template file for 'kactivitymanagerd'
 pkgname=kactivitymanagerd
-version=5.27.2
+version=5.27.8
 revision=1
 build_style=cmake
 build_helper="qemu"
@@ -13,4 +13,4 @@ maintainer="John <me@johnnynator.dev>"
 license="GPL-2.0-or-later"
 homepage="https://invent.kde.org/plasma/kactivitymanagerd"
 distfiles="${KDE_SITE}/plasma/${version}/${pkgname}-${version}.tar.xz"
-checksum=3dee273247aa16e2145134142e7aa476417c4da46b1269261bc2e15026f622da
+checksum=d44b6ce1e7839fde5b05b745875f282ee0ce54267f0a4459aa74b6dbede832d9

@@ -13,6 +13,10 @@ update_check() {
         if [ "$XBPS_UPDATE_CHECK_VERBOSE" ]; then
             echo "using $XBPS_TARGET_PKG/update overrides" 1>&2
         fi
+        if [ -n "$disabled" ]; then
+            echo "update-check DISABLED for $original_pkgname: $disabled" 1>&2
+            return 0
+        fi
     elif [ -z "$distfiles" ]; then
         if [ "$XBPS_UPDATE_CHECK_VERBOSE" ]; then
             echo "NO DISTFILES found for $original_pkgname" 1>&2
@@ -71,6 +75,7 @@ update_check() {
               *crates.io*|\
               *codeberg.org*|\
               *hg.sr.ht*|\
+              *software.sil.org*|\
               *git.sr.ht*)
                 continue
                 ;;
@@ -129,13 +134,13 @@ update_check() {
             *github.com*)
                 pkgurlname="$(printf %s "$url" | cut -d/ -f4,5)"
                 url="https://github.com/$pkgurlname/tags"
-                rx='/archive/refs/tags/(v?|\Q'"$pkgname"'\E-)?\K[\d.]+(?=\.tar\.gz")';;
+                rx='/archive/refs/tags/(v?|\Q'"$pkgname"'\E[-_])?\K[\d.]+(?=\.tar\.gz")';;
             *//gitlab.*|*code.videolan.org*)
                 case "$url" in
                     */-/*) pkgurlname="$(printf %s "$url" | sed -e 's%/-/.*%%g; s%/$%%')";;
                     *) pkgurlname="$(printf %s "$url" | cut -d / -f 1-5)";;
                 esac
-                url="$pkgurlname/tags"
+                url="$pkgurlname/-/tags"
                 rx='/archive/[^/]+/\Q'"$pkgname"'\E-v?\K[\d.]+(?=\.tar\.gz")';;
             *bitbucket.org*)
                 pkgurlname="$(printf %s "$url" | cut -d/ -f4,5)"
@@ -171,6 +176,18 @@ update_check() {
                 rx='<guid>\Q'"${url%/*}"'\E/(v-?|\Q'"$pkgname"'\E-)?\K[\d.]+(?=</guid>)' ;;
             *pkgs.fedoraproject.org*)
                 url="https://pkgs.fedoraproject.org/repo/pkgs/$pkgname" ;;
+            *software.sil.org/downloads/*)
+                pkgurlname=$(printf '%s\n' "$url" | cut -d/ -f6)
+                url="https://software.sil.org/$pkgurlname/download/"
+                pkgname="${pkgname#font-}"
+                pkgname="${pkgname#sil-}"
+                _pkgname="${pkgname//-/}"
+                rx="($_pkgname|${_pkgname}SIL)[_-]\K[0-9.]+(?=\.tar|\.zip)" ;;
+            *software.sil.org/*)
+                pkgname="${pkgname#font-}"
+                pkgname="${pkgname#sil-}"
+                _pkgname="${pkgname//-/}"
+                rx="($_pkgname|${_pkgname}SIL)[_-]\K[0-9.]+(?=\.tar|\.zip)" ;;
             esac
         fi
 

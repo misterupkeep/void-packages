@@ -1,9 +1,9 @@
 # Template file for 'eclipse'
 pkgname=eclipse
-version=4.26
-revision=1
+version=4.28
+revision=2
 #code name of version
-_release=2022-12
+_release=2023-06
 archs="x86_64"
 depends="openjdk11 gtk+3 webkit2gtk libXtst
  hicolor-icon-theme desktop-file-utils"
@@ -17,9 +17,9 @@ make_dirs="/usr/lib/eclipse/dropins 0770 root users"
 _patch=R
 _edition=java
 _mirror="http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse"
-distfiles="${_mirror}/technology/epp/downloads/release/${_release}/${_patch}/eclipse-${_edition}-${_release}-${_patch}-linux-gtk-x86_64.tar.gz"
-checksum=5a71af895af325de533e175289983a023167183ebdcc4cb7d8b3b01420d5b8c0
-python_version=2
+distfiles="${_mirror}/technology/epp/downloads/release/${_release}/${_patch}/eclipse-${_edition}-${_release}-R-linux-gtk-x86_64.tar.gz"
+checksum=142e33831fbbe52f53255a746b35a038dff0366a04cb4d3be2d8fe0ce76f34e8
+python_version=3
 
 do_install() {
 	vmkdir usr/lib/eclipse

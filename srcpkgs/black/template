@@ -1,7 +1,7 @@
 # Template file for 'black'
 pkgname=black
-version=23.1.0
-revision=1
+version=23.9.1
+revision=2
 build_style=python3-pep517
 hostmakedepends="hatchling hatch-vcs"
 depends="python3-click python3-platformdirs python3-pathspec python3-packaging
@@ -14,7 +14,7 @@ license="MIT"
 homepage="https://black.readthedocs.io/en/stable/"
 changelog="https://raw.githubusercontent.com/psf/black/main/CHANGES.md"
 distfiles="${PYPI_SITE}/b/black/black-${version}.tar.gz"
-checksum=b0bd97bea8903f5a2ba7219257a44e3f1f9d00073d6cc1add68f0beec69692ac
+checksum=24b6b3ff5c6d9ea08a8888f6977eae858e1f340d7260cf56d70a49823236b62d
 make_check_pre="env PYTHONPATH=src"
 
 post_check() {

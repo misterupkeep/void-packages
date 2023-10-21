@@ -1,6 +1,6 @@
 # Template file for 'glib'
 pkgname=glib
-version=2.74.0
+version=2.78.0
 revision=3
 build_style=meson
 # static version is necessary for qemu-user-static;
@@ -14,10 +14,10 @@ short_desc="GNU library of C routines"
 maintainer="Michal Vasilek <michal@vasilek.cz>"
 license="LGPL-2.1-or-later"
 homepage="https://wiki.gnome.org/Projects/GLib"
-#changelog="https://gitlab.gnome.org/GNOME/glib/raw/glib-2-74/NEWS"
+#changelog="https://gitlab.gnome.org/GNOME/glib/raw/glib-2-78/NEWS"
 changelog="https://gitlab.gnome.org/GNOME/glib/raw/main/NEWS"
 distfiles="${GNOME_SITE}/glib/${version%.*}/glib-${version}.tar.xz"
-checksum=3652c7f072d7b031a6b5edd623f77ebc5dcd2ae698598abcc89ff39ca75add30
+checksum=44eaab8b720877ce303c5540b657b126f12dc94972d9880b52959f43fb537b30
 make_check_pre="dbus-run-session"
 
 build_options="gtk_doc"
@@ -26,6 +26,13 @@ desc_option_gtk_doc="Build GTK API docs"
 if [ -z "$CROSS_BUILD" ]; then
 	build_options_default+=" gtk_doc"
 fi
+
+post_patch() {
+	# Timer test is flaky on 32 bit (does float comparisons)
+	if [ "${XBPS_TARGET_WORDSIZE}" = "32" ]; then
+		vsed -e "s/'timer' : {},//" -i glib/tests/meson.build
+	fi
+}
 
 pre_check() {
 	# machine-id is a random, non-zero value
@@ -50,7 +57,7 @@ libglib-devel_package() {
 }
 
 glib-devel_package() {
-	depends="python3 libglib-devel>=${version}_${revision}"
+	depends="python3-setuptools libglib-devel>=${version}_${revision}"
 	short_desc+=" - development files"
 	python_version=3
 	pycompile_dirs="usr/share/glib-2.0/codegen usr/share/glib-2.0/gdb"

@@ -1,17 +1,17 @@
 # Template file for 'upmpdcli'
 pkgname=upmpdcli
-version=1.7.1
+version=1.8.1
 revision=1
 build_style=gnu-configure
 hostmakedepends="pkg-config tar"
-makedepends="jsoncpp-devel libmicrohttpd-devel libmpdclient-devel libupnpp-devel"
+makedepends="jsoncpp-devel libcurl-devel libmicrohttpd-devel libmpdclient-devel libupnpp-devel"
 short_desc="UPnP Media Renderer front-end for MPD"
 maintainer="amak <amak.git@outlook.com>"
 license="LGPL-2.1-or-later"
 homepage="https://www.lesbonscomptes.com/upmpdcli"
 changelog="https://www.lesbonscomptes.com/upmpdcli/pages/releases.html"
 distfiles="https://www.lesbonscomptes.com/upmpdcli/downloads/upmpdcli-${version}.tar.gz"
-checksum=9a2e1322c47825f31e2f97ff8c89172e23dd0cea6763f355d7e7ecc71b168d17
+checksum=0a051679b2a7f67911a4297af6c2607532984fa33f6fd3db8087e47d0910a232
 python_version=3
 
 system_accounts="_upmpdcli"

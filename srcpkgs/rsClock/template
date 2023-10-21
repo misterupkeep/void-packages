@@ -1,14 +1,15 @@
 # Template file for 'rsClock'
 pkgname=rsClock
-version=0.1.4
+version=0.1.10
 revision=1
 build_style=cargo
 short_desc="Simple terminal clock written in Rust"
 maintainer="0x0f0f0f <sudo-woodo3@protonmail.com>"
 license="MIT"
 homepage="https://github.com/valebes/rsClock"
-distfiles="https://github.com/valebes/rsClock/archive/v${version}.tar.gz"
-checksum=3e1c903a944325a9fabebfed34029830c94b4cd2463354bc02be01eb18401d04
+changelog="https://github.com/valebes/rsClock/releases"
+distfiles="https://github.com/valebes/rsClock/archive/refs/tags/v${version}.tar.gz"
+checksum=b4ce70801680fec5c80422b9f3367615c3a0ca96f620058f93f79a522b88a30e
 
 post_install() {
 	vlicense LICENSE

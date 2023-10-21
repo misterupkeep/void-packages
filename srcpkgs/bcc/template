@@ -1,6 +1,6 @@
 # Template file for 'bcc'
 pkgname=bcc
-version=0.26.0
+version=0.28.0
 revision=2
 build_style=cmake
 configure_args="-DREVISION=${version} -DENABLE_LLVM_SHARED=1"
@@ -12,12 +12,8 @@ maintainer="Leah Neukirchen <leah@vuxu.org>"
 license="Apache-2.0"
 homepage="https://github.com/iovisor/bcc"
 distfiles="https://github.com/iovisor/bcc/releases/download/v${version}/bcc-src-with-submodule.tar.gz>bcc-${version}.tar.gz"
-checksum=cd6c3580ece8f3e99cdc25155dc77d09c1f10dd9d8a13105f468af45963030b0
+checksum=65adcaf4cee17fa3a94d0bb96d3691ca7e5864244e7bd52df93f7ae6c004f23d
 python_version="3"
-
-if [ "$XBPS_TARGET_NO_ATOMIC8" ]; then
-	makedepends+=" libatomic-devel"
-fi
 
 post_extract() {
 	sed -i '/tests/d' CMakeLists.txt  # break on musl
@@ -54,6 +50,7 @@ bcc-devel_package() {
 	depends="${sourcepkg}>=${version}_${revision}"
 	pkg_install() {
 		vmove usr/include
+		vmove usr/lib/*.a
 		vmove usr/lib/*.so
 		vmove usr/lib/pkgconfig
 		vmove usr/share/bcc/examples

@@ -1,6 +1,6 @@
 # Template file for 'pd'
 pkgname=pd
-version=0.53.1
+version=0.54.0
 revision=1
 _ver=${version%.*}-${version##*.}
 build_style=gnu-configure
@@ -13,7 +13,7 @@ maintainer="Andrea Brancaleoni <abc@pompel.me>"
 license="BSD-3-Clause"
 homepage="https://puredata.info"
 distfiles="http://msp.ucsd.edu/Software/pd-$_ver.src.tar.gz"
-checksum=544fac285bd119f62de79cbb9f92789919cab669c716c6c4e713dc52a0d0133c
+checksum=e8c14a7d8579096c6e3ac9b55782da602848448971d107306a1e526ed0456485
 
 pre_configure() {
 	./autogen.sh

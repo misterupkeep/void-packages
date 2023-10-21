@@ -1,6 +1,6 @@
 # Template file for 'akregator'
 pkgname=akregator
-version=22.12.1
+version=23.08.2
 revision=1
 build_style=cmake
 configure_args="-DDESKTOPTOJSON_EXECUTABLE=/usr/bin/desktoptojson"
@@ -13,4 +13,4 @@ maintainer="Orphaned <orphan@voidlinux.org>"
 license="GPL-2.0-or-later, GFDL-1.2-only"
 homepage="https://www.kde.org/applications/internet/akregator"
 distfiles="${KDE_SITE}/release-service/${version}/src/${pkgname}-${version}.tar.xz"
-checksum=07838ddf9586824108fd9f2ee1b9aceba03874ba360c3635e48a1fc41816d591
+checksum=38317d50350174fa172607d60d3eb1a40832be649ced085680b70c507f2f06ea

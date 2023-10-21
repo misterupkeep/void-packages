@@ -1,6 +1,6 @@
 # Template file for 'qbittorrent'
 pkgname=qbittorrent
-version=4.5.1
+version=4.5.4
 revision=1
 create_wrksrc=yes
 build_style=gnu-configure
@@ -16,14 +16,14 @@ license="GPL-2.0-or-later"
 homepage="https://www.qbittorrent.org/"
 changelog="https://www.qbittorrent.org/news.php"
 distfiles="${SOURCEFORGE_SITE}/qbittorrent/qbittorrent-${version}.tar.xz"
-checksum=0527a5887454d6a5f386846f3c73029a6fbeec3d1a4c92e1dc485c485c16add0
+checksum=f92bcd3ed25600796c59257c507e56a252a65af60bd042b71f1e7ff3fe5264da
 CXXFLAGS=-std=gnu++17
 
 do_extract() {
 	local n=${pkgname}-${version}
 	mkdir -p build-nox build-x11
-	bsdtar xf ${XBPS_SRCDISTDIR}/${n}/${n}.tar.xz --strip-components=1 -C build-x11
-	bsdtar xf ${XBPS_SRCDISTDIR}/${n}/${n}.tar.xz --strip-components=1 -C build-nox
+	vsrcextract -C build-x11 ${n}.tar.xz
+	vsrcextract -C build-nox ${n}.tar.xz
 }
 
 do_configure() {

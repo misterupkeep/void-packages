@@ -1,6 +1,6 @@
 # Template file for 'fwupd'
 pkgname=fwupd
-version=1.8.8
+version=1.9.5
 revision=1
 build_style=meson
 build_helper="gir"
@@ -20,11 +20,11 @@ conf_files="
  /etc/fwupd/*.conf
  /etc/fwupd/remotes.d/*.conf"
 short_desc="Daemon to allow session software to update firmware"
-maintainer="Érico Nogueira <ericonr@disroot.org>"
+maintainer="dataCobra <datacobra@thinkbot.de>"
 license="LGPL-2.1-or-later"
 homepage="https://github.com/fwupd/fwupd"
 distfiles="https://github.com/fwupd/fwupd/archive/${version}.tar.gz"
-checksum=8a8f90680c1598407380ad57c15898bd48a903f2a74f3a97469a8e68b18f1fc1
+checksum=efc15b39e1802aab5f306a8ff584fc158811e30e8f4a4a2b3302bc20ca0bc47a
 replaces="fwupdate>=0"
 
 case "$XBPS_TARGET_MACHINE" in
@@ -62,7 +62,6 @@ pre_build() {
 }
 
 post_install() {
-	vcompletion data/bash-completion/fwupdagent bash fwupdagent
 	vcompletion data/bash-completion/fwupdmgr bash fwupdmgr
 	vcompletion data/bash-completion/fwupdtool bash fwupdtool
 }

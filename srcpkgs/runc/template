@@ -1,6 +1,6 @@
 # Template file for 'runc'
 pkgname=runc
-version=1.1.4
+version=1.1.9
 revision=2
 build_style=go
 go_import_path=github.com/opencontainers/runc
@@ -12,8 +12,9 @@ short_desc="CLI tool for spawning and running OCI containers"
 maintainer="Orphaned <orphan@voidlinux.org>"
 license="Apache-2.0"
 homepage="https://github.com/opencontainers/runc"
+changelog="https://github.com/opencontainers/runc/raw/main/CHANGELOG.md"
 distfiles="https://github.com/opencontainers/runc/releases/download/v${version}/runc.tar.xz"
-checksum=9f5972715dffb0b2371e4d678c1206cc8c4ec5eb80f2d48755d150bac49be35b
+checksum=7695febe134e17559b26224821a2a123bc9e9a637ad4a8c47e99ae0a1ec71dc2
 
 post_build() {
 	make man

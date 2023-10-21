@@ -1,21 +1,22 @@
 # Template file for 'gtk4'
 pkgname=gtk4
-version=4.8.3
+version=4.12.3
 revision=1
 build_style=meson
 build_helper="gir"
-configure_args="-Dman-pages=true -Dbuild-tests=false -Dgtk_doc=true
- -Dbroadway-backend=$(vopt_if broadway true false)
- -Dx11-backend=$(vopt_if x11 true false)
- -Dwayland-backend=$(vopt_if wayland true false)
- -Dintrospection=$(vopt_if gir enabled disabled)
- -Dcolord=$(vopt_if colord enabled disabled)
- -Dcloudproviders=$(vopt_if cloudproviders enabled disabled)
- -Dvulkan=$(vopt_if vulkan enabled disabled)
- -Dtracker=$(vopt_if tracker enabled disabled)"
+configure_args="-Dman-pages=true -Ddocumentation=true -Dbuild-tests=false
+ -Dbuild-testsuite=false -Dbuild-examples=false
+ $(vopt_bool broadway broadway-backend)
+ $(vopt_bool x11 x11-backend)
+ $(vopt_bool wayland wayland-backend)
+ $(vopt_feature gir introspection)
+ $(vopt_feature colord colord)
+ $(vopt_feature cloudproviders cloudproviders)
+ $(vopt_feature vulkan vulkan)
+ $(vopt_feature tracker tracker)"
 hostmakedepends="gettext-devel glib-devel gi-docgen perl
  pkg-config sassc gettext libxslt docbook-xsl python3-docutils
- $(vopt_if wayland 'wayland-devel wayland-protocols')"
+ $(vopt_if wayland 'wayland-devel wayland-protocols') shaderc"
 makedepends="at-spi2-atk-devel gdk-pixbuf-devel libepoxy-devel pango-devel
  iso-codes graphene-devel gst-plugins-bad1-devel ffmpeg-devel
  $(vopt_if colord 'colord-devel') $(vopt_if cups 'cups-devel')
@@ -29,10 +30,10 @@ short_desc="GIMP ToolKit (v4)"
 maintainer="Michal Vasilek <michal@vasilek.cz>"
 license="LGPL-2.1-or-later"
 homepage="https://www.gtk.org/"
-#changelog="https://gitlab.gnome.org/GNOME/gtk/-/raw/main/NEWS"
-changelog="https://gitlab.gnome.org/GNOME/gtk/-/raw/gtk-4-8/NEWS"
+# changelog="https://gitlab.gnome.org/GNOME/gtk/-/raw/main/NEWS"
+changelog="https://gitlab.gnome.org/GNOME/gtk/-/raw/gtk-4-12/NEWS"
 distfiles="${GNOME_SITE}/gtk/${version%.*}/gtk-${version}.tar.xz"
-checksum=b362f968d085b4d3d9340d4d38c706377ded9d5374e694a2b6b7e6292e3cba74
+checksum=148ce262f6c86487455fb1d9793c3f58bc3e1da477a29617fadb0420f5870a89
 
 # Package build options
 build_options="broadway cloudproviders colord cups gir vulkan wayland x11 tracker"

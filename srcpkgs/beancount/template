@@ -1,7 +1,7 @@
 # Template file for 'beancount'
 pkgname=beancount
 version=2.3.5
-revision=2
+revision=3
 build_style=python3-module
 make_check_args="--pyargs beancount --ignore beancount/web/web_test.py
  --deselect beancount/scripts/bake_test.py::TestScriptBake::test_bake_directory
@@ -13,7 +13,7 @@ depends="python3-pytest python3-dateutil python3-ply python3-bottle python3-lxml
  python3-google-api-python-client python3-oauth2client"
 checkdepends="${depends} gnupg python3-google-auth-oauthlib python3-httplib2"
 short_desc="Double-entry accounting system based on plain text files"
-maintainer="Aluísio Augusto Silva Gonçalves <aluisio@aasg.name>"
+maintainer="Orphaned <orphan@voidlinux.org>"
 license="GPL-2.0-only"
 homepage="https://beancount.github.io/"
 changelog="https://raw.githubusercontent.com/beancount/beancount/master/CHANGES"

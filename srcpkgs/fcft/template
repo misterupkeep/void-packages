@@ -1,10 +1,10 @@
 # Template file for 'fcft'
 pkgname=fcft
-version=3.1.4
+version=3.1.6
 revision=1
 build_style=meson
-configure_args="-Drun-shaping=$(vopt_if textshaping enabled disabled)
- -Ddocs=enabled"
+configure_args="-Ddocs=enabled
+ $(vopt_feature textshaping run-shaping)"
 hostmakedepends="pkg-config scdoc"
 makedepends="fontconfig-devel freetype-devel pixman-devel tllist
  $(vopt_if textshaping harfbuzz-devel)
@@ -14,8 +14,8 @@ maintainer="Isaac Freund <mail@isaacfreund.com>"
 license="MIT"
 homepage="https://codeberg.org/dnkl/fcft"
 changelog="https://codeberg.org/dnkl/fcft/raw/branch/master/CHANGELOG.md"
-distfiles="${homepage}/archive/${version}.tar.gz"
-checksum=37363f7af0430161902b8d194016366b0fbca3b8353ee26b70c5b7ad8e9602c8
+distfiles="https://codeberg.org/dnkl/fcft/archive/${version}.tar.gz"
+checksum=95797f945faf407cb658efe6e5dcf0cc3ab08ef01e159383f9cf7cf5ee257506
 
 build_options="textshaping"
 build_options_default="textshaping"

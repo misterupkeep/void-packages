@@ -1,6 +1,6 @@
 # Template file for 'starship'
 pkgname=starship
-version=1.12.0
+version=1.16.0
 revision=1
 build_style=cargo
 build_helper=qemu
@@ -13,14 +13,7 @@ license="ISC"
 homepage="https://starship.rs"
 changelog="https://raw.githubusercontent.com/starship/starship/master/CHANGELOG.md"
 distfiles="https://github.com/starship/starship/archive/refs/tags/v${version}.tar.gz"
-checksum=748a0541009b0bee5f51b716d072f244d8d5cb3fb8d768519ed305494ea11e02
-
-post_build() {
-	STARSHIP="target/${RUST_TARGET}/release/starship"
-	vtargetrun ${STARSHIP} completions zsh  >starship.zsh
-	vtargetrun ${STARSHIP} completions bash >starship.bash
-	vtargetrun ${STARSHIP} completions fish >starship.fish
-}
+checksum=133888e190ce1563927e16ee693da3026d2e668d975ac373f853e030743775c5
 
 do_check() {
 	mkdir -p fake-home
@@ -28,9 +21,10 @@ do_check() {
 }
 
 post_install() {
-	vcompletion starship.bash bash
-	vcompletion starship.fish fish
-	vcompletion starship.zsh zsh
+	for shell in bash fish zsh; do
+		vtargetrun ${DESTDIR}/usr/bin/starship completions ${shell} > starship.${shell}
+		vcompletion starship.${shell} ${shell}
+	done
 
 	vlicense LICENSE
 }
