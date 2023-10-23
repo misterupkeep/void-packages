@@ -1,6 +1,6 @@
 # Template file for 'ashuffle'
 pkgname=ashuffle
-version=3.13.6
+version=3.14.1
 revision=1
 build_style=meson
 hostmakedepends="git cmake pkg-config"
